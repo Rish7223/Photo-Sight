@@ -19,18 +19,11 @@
   font-weight: 700;
 }
 
-html,
-body {
+*,
+*::after,
+*::before {
   padding: 0;
   margin: 0;
-  font-family: 'Lato';
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
   box-sizing: border-box;
+  font-family: 'Lato';
 }
