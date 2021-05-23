@@ -1,6 +1,6 @@
 # Photo-Sight
 
-The best platform to share you best moment with others.
+The best platform to share you moment with others.
 
 ## Project Info
 
