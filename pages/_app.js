@@ -1,5 +1,5 @@
-import '../styles/globals.css';
 import React from 'react';
+import '../styles/globals.scss';
 import DarkModeProvider from '../context/Darkmode';
 
 function MyApp({ Component, pageProps }) {

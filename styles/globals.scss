@@ -1,6 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+$primary_color: #49c5b6;
+$secondary_color: #ff9398;
+$primaryDark_color: #eb1461;
+$textGray_color: #909398;
+$bgLight_color: #f5f9ff;
+$bgDark_color: #2b2b2b;
 
 @font-face {
   font-family: 'Lato';
@@ -26,4 +29,8 @@
   margin: 0;
   box-sizing: border-box;
   font-family: 'Lato';
+}
+
+html {
+  font-size: 16px;
 }

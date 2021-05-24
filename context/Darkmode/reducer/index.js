@@ -6,15 +6,15 @@ export default function DarkReducer(state, action) {
       return {
         ...state,
         isDark: true,
-        bgColor: 'bg-bgDark',
-        textColor: 'text-white'
+        bgColor: '#2b2b2b',
+        textColor: '#ffffff'
       };
     case LIGHT:
       return {
         ...state,
         isDark: false,
-        bgColor: 'bg-bgLight',
-        textColor: 'text-black'
+        bgColor: '#F5F9FF',
+        textColor: '#2b2b2b'
       };
     default:
       return state;

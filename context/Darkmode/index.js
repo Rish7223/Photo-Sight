@@ -1,13 +1,14 @@
-import { createContext, useReducer } from 'react';
+import { createContext, useContext, useReducer } from 'react';
 import { DARK, LIGHT } from './actionType';
 import DarkReducer from './reducer';
 
-export const DarkMode = createContext();
+const DarkMode = createContext();
+export const useDarkContext = () => useContext(DarkMode);
 
 const initialState = {
   isDark: false,
-  bgColor: 'bg-bgLight',
-  textColor: 'text-black'
+  bgColor: '#F5F9FF',
+  textColor: '#2b2b2b'
 };
 
 const DarkModeProvider = ({ children }) => {
