@@ -39,6 +39,9 @@ const LoginPattern = Styled.div`
     @media screen and (max-width: 700px){
         height: 411px;
         justify-content: flex-start;
+        width: 100%;
+        padding: 20px 30px;
+        border-radius: 2px;
     }
 `;
 

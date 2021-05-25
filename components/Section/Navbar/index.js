@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { StyledNavbar } from './StyledNavbar';
 
-const Navbar = ({ logout }) => {
+const Navbar = () => {
   return (
     <StyledNavbar>
       <Image
@@ -11,7 +11,6 @@ const Navbar = ({ logout }) => {
         layout="fixed"
         alt="logo"
       />
-      <button onClick={logout}>logout</button>
     </StyledNavbar>
   );
 };

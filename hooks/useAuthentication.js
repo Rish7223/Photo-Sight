@@ -87,14 +87,8 @@ const useAuthentication = () => {
   };
 
   //   logout method
-  const logout = async () => {
-    auth.onAuthStateChanged(user => {
-      if (!user) {
-        setAuthUser(null);
-      } else {
-        auth.signOut();
-      }
-    });
+  const logout = () => {
+    auth.signOut();
   };
 
   return {

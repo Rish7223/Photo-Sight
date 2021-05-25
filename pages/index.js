@@ -13,6 +13,7 @@ const ContentDiv = Styled.div`
   display :flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
 
   .form {
     position: relative;
@@ -27,6 +28,10 @@ const ContentDiv = Styled.div`
     .form {
       left: 0px;
       transform: translateY(-20%);
+      width: 100%;
+      padding-left: 20px;
+      padding-right: 20px;
+      margin: 0;
     }
   }
 `;
