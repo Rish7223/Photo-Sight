@@ -10,3 +10,24 @@ export const StyledNavbar = Styled.div`
    padding: 0 10px;
 }
 `;
+
+export const NavbarComponent = Styled.div`
+min-height: 70px;
+height: 10vh;
+display: flex;
+align-items: center;
+justify-content: space-between;
+
+section {
+  display: flex;
+  align-items: center;
+
+  p {
+    margin-left: 10px;
+  }
+
+  button {
+    margin-left: 10px;
+  }
+}
+`;
