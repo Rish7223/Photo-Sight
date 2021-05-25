@@ -16,11 +16,24 @@ const LoginPattern = Styled.div`
     background-position: center;
 
     .heading {
-        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        text-shadow: 0px 4px 4px #6d7786;
     }
 
     .paragraph {
-        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        text-shadow: 0px 4px 4px #6d7786;
+    }
+
+    .cta {
+      width: 100%;
+      padding: 12px 10px;
+      background-color: #fadddddd;
+      color: #2b2b2b;
+      font-size: 1.3rem;
+      font-weight: 500;
+      border-radius: 50px;
+      margin-top: 20px;
+      border: none;
+      cursor: pointer;
     }
 
     @media screen and (max-width: 700px){
@@ -29,7 +42,7 @@ const LoginPattern = Styled.div`
     }
 `;
 
-const LoginFormPattern = () => {
+const LoginFormPattern = ({ isLoginComponent, setLoginComponent }) => {
   return (
     <LoginPattern>
       <Heading color="#FFFFFF" fontSize="3rem" className="heading">
@@ -39,6 +52,15 @@ const LoginFormPattern = () => {
         Login with your social accounts and start sharing your moment at the
         worlds best social platform
       </Paragraph>
+      <button
+        type="button"
+        className="cta"
+        onClick={() => {
+          setLoginComponent(!isLoginComponent);
+        }}
+      >
+        {isLoginComponent ? 'Sign up' : 'Login'}
+      </button>
     </LoginPattern>
   );
 };

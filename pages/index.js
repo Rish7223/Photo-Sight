@@ -1,8 +1,11 @@
 import AppLayout from '../components/App-Layout';
-import LoginForm from '../components/Login-Form';
+import { LoginForm, SignUpForm } from '../components/Auth-Form';
 import Navbar from '../components/Section/Navbar';
 import LoginFormPattern from '../components/UI/PatternBox';
 import Styled from 'styled-components';
+import { useState } from 'react';
+import useAuthentication from '../hooks/useAuthentication';
+import Alert from '../components/UI/Alert';
 
 const ContentDiv = Styled.div`
   min-height: 90vh;
@@ -23,18 +26,41 @@ const ContentDiv = Styled.div`
     justify-content: center;
     .form {
       left: 0px;
-      transform: translateY(-40%);
+      transform: translateY(-20%);
     }
   }
 `;
 
 export default function Home() {
+  const { loading, authenticate, error, register, socialLogin, logout } =
+    useAuthentication();
+  const [isLoginComponent, setLoginComponent] = useState(true);
+
   return (
     <AppLayout>
-      <Navbar />
+      <Navbar logout={logout} />
+      {error && <Alert type={error.type} message={error.message} />}
       <ContentDiv>
-        <LoginForm className="form" />
-        <LoginFormPattern className="pattern" />
+        {isLoginComponent ? (
+          <LoginForm
+            className="form"
+            loading={loading}
+            authenticate={authenticate}
+            socialLogin={socialLogin}
+          />
+        ) : (
+          <SignUpForm
+            className="form"
+            loading={loading}
+            register={register}
+            socialLogin={socialLogin}
+          />
+        )}
+        <LoginFormPattern
+          className="pattern"
+          setLoginComponent={setLoginComponent}
+          isLoginComponent={isLoginComponent}
+        />
       </ContentDiv>
     </AppLayout>
   );

@@ -4,7 +4,12 @@ class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <Head />
+        <Head>
+          <meta
+            name="description"
+            content="The best platform to share your moment with others "
+          />
+        </Head>
         <body>
           <Main />
           <NextScript />

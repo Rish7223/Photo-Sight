@@ -2,7 +2,9 @@ import styled from 'styled-components';
 
 export const Input = styled.input`
   border: 2px solid #2b2b2baa;
-  padding: 15px 10px 15px 50px;
+  padding: ${props => (props.padding ? props.padding : ' 15px 0')};
+  padding-left: 50px;
+  padding-right: 10px;
   border-radius: 10px;
   font-size: 18px;
   color: #2b2b2b;

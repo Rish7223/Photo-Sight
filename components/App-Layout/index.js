@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Head from 'next/head';
 import { useDarkContext } from '../../context/Darkmode';
 
-const LayoutComponent = styled.form`
+const LayoutComponent = styled.div`
   min-height: 100vh;
   line-height: 1.7;
   padding: 0 6rem;

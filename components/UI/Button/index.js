@@ -5,7 +5,7 @@ const ButtonComponent = styled.button`
   background-color: transparent;
   cursor: pointer;
   transition: all 0.2s ease;
-  opacity: 0.9;
+  opacity: 0.8;
 
   :hover {
     opacity: 1;
@@ -13,7 +13,7 @@ const ButtonComponent = styled.button`
 `;
 
 export const Button = styled(ButtonComponent)`
-  background-color: #eb1461;
+  background-color: #ea005e;
   color: #fff;
   font-weight: 500;
   border-radius: 10px;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledLoginForm = styled.div`
+export const StyledLoginForm = styled.form`
   background-color: #fff;
   border-radius: 30px;
   padding: 30px 40px;
@@ -17,7 +17,7 @@ export const StyledLoginForm = styled.div`
   }
 
   .form_label {
-    margin-bottom: 5px;
+    margin-bottom: 4px;
   }
 
   .form_input {
@@ -32,13 +32,15 @@ export const StyledLoginForm = styled.div`
   }
 
   .form_input2 {
-    position: relative;
-    width: 100%;
-
     img {
-      position: absolute;
       top: 14px;
       left: 18px;
+    }
+  }
+  .form_input3 {
+    img {
+      top: 14px;
+      left: 15px;
     }
   }
 `;
