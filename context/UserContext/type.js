@@ -1,6 +1,9 @@
-// export const LOGIN = 'LOGIN';
-// export const LOGOUT = 'LOGOUT';
-// export const REGISTER = 'REGISTER';
-// export const SOCIAL_LOGIN = 'SOCIAL_LOGIN';
+export const LOGIN = 'LOGIN';
+export const LOGOUT = 'LOGOUT';
+export const REGISTER = 'REGISTER';
+export const SOCIAL_LOGIN = 'SOCIAL_LOGIN';
+export const SET_LOADING = 'SET_LOADING';
+export const SET_APP_LOADING = 'SET_APP_LOADING';
 export const AUTH = 'AUTH';
 export const AUTH_FAIL = 'AUTH_FAIL';
+export const SET_ERROR = 'SET_ERROR';

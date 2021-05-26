@@ -6,7 +6,7 @@ import { NavbarComponent } from './StyledNavbar';
 
 const MainNavbar = () => {
   const {
-    authState: { user }
+    authState: { auth }
   } = useUserContext();
   const { logout } = useAuthentication();
   return (
@@ -33,7 +33,7 @@ const MainNavbar = () => {
               clipRule="evenodd"
             />
           </svg>
-          <p>{user && user.email}</p>
+          <p>{auth.user && auth.user.email}</p>
           <Button
             padding="8px 34px"
             onClick={() => {

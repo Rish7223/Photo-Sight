@@ -4,8 +4,8 @@ import Navbar from '../components/Section/Navbar';
 import LoginFormPattern from '../components/UI/PatternBox';
 import Styled from 'styled-components';
 import { useState } from 'react';
-import useAuthentication from '../hooks/useAuthentication';
 import Alert from '../components/UI/Alert';
+import { useUserContext } from '../context/UserContext';
 
 const ContentDiv = Styled.div`
   min-height: 90vh;
@@ -37,29 +37,21 @@ const ContentDiv = Styled.div`
 `;
 
 export default function Home() {
-  const { loading, authenticate, error, register, socialLogin, logout } =
-    useAuthentication();
   const [isLoginComponent, setLoginComponent] = useState(true);
+  const {
+    authState: { error },
+    dispatchLogout
+  } = useUserContext();
 
   return (
     <AppLayout>
-      <Navbar logout={logout} />
+      <Navbar logout={dispatchLogout} />
       {error && <Alert type={error.type} message={error.message} />}
       <ContentDiv>
         {isLoginComponent ? (
-          <LoginForm
-            className="form"
-            loading={loading}
-            authenticate={authenticate}
-            socialLogin={socialLogin}
-          />
+          <LoginForm className="form" />
         ) : (
-          <SignUpForm
-            className="form"
-            loading={loading}
-            register={register}
-            socialLogin={socialLogin}
-          />
+          <SignUpForm className="form" />
         )}
         <LoginFormPattern
           className="pattern"

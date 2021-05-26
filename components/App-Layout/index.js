@@ -5,6 +5,7 @@ import { useDarkContext } from '../../context/Darkmode';
 import { useUserContext } from '../../context/UserContext';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+
 const LayoutComponent = styled.div`
   min-height: 100vh;
   line-height: 1.7;
@@ -18,20 +19,17 @@ const LayoutComponent = styled.div`
 
 const AppLayout = ({ title = 'Photosight', children }) => {
   const {
-    authState: { isAuthenticate },
-    userAuthenticate
+    authState: { loading, isAuthenticate },
+    dispatchAuthenticate
   } = useUserContext();
   const router = useRouter();
 
   useEffect(() => {
-    userAuthenticate();
-  }, []);
-
-  useEffect(() => {
-    if (isAuthenticate) {
-      router.push('/home');
-    } else {
+    dispatchAuthenticate();
+    if (!loading && !isAuthenticate) {
       router.push('/');
+    } else {
+      router.push('/home');
     }
   }, [isAuthenticate]);
 
@@ -44,7 +42,23 @@ const AppLayout = ({ title = 'Photosight', children }) => {
       <Head>
         <title>{title}</title>
       </Head>
-      {children}
+      {!loading ? (
+        children
+      ) : (
+        <div
+          style={{
+            minHeight: '100vh',
+            backgroundColor: '#7779',
+            color: '#fff',
+            fontSize: '3rem',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          loading...
+        </div>
+      )}
     </LayoutComponent>
   );
 };

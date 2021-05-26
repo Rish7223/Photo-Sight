@@ -1,10 +1,16 @@
 import { useState } from 'react';
+import { useUserContext } from '../../context/UserContext';
 import { Button } from '../UI/Button';
 import GoogleAuthButton from '../UI/Button/googleBtn';
 import { Input } from '../UI/Input';
 import { Heading, Paragraph } from '../UI/Typography';
 import { StyledLoginForm } from './styledLoginForm';
-const LoginForm = ({ loading, authenticate, socialLogin }) => {
+const LoginForm = () => {
+  const {
+    authState: { auth },
+    dispatchLogin,
+    dispatchSocialLogin
+  } = useUserContext();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -17,7 +23,7 @@ const LoginForm = ({ loading, authenticate, socialLogin }) => {
 
   const onsubmit = event => {
     event.preventDefault();
-    authenticate(formData);
+    dispatchLogin(formData);
     setFormData({
       email: '',
       password: ''
@@ -66,7 +72,7 @@ const LoginForm = ({ loading, authenticate, socialLogin }) => {
         </section>
       </div>
       <Button type="submit" width="100%" margin="20px 0 0 0 ">
-        {!loading ? (
+        {!auth.authLoading ? (
           'Login'
         ) : (
           <img
@@ -80,7 +86,7 @@ const LoginForm = ({ loading, authenticate, socialLogin }) => {
       <Paragraph center size="14px" color="rgba(0, 0, 0, 0.56)" margin="20px 0">
         or singin using social accounts
       </Paragraph>
-      <GoogleAuthButton onclick={socialLogin} />
+      <GoogleAuthButton onclick={dispatchSocialLogin} />
     </StyledLoginForm>
   );
 };
