@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@headlessui/react": "^1.2.0",
     "firebase": "^8.6.2",
     "next": "10.2.2",
     "react": "17.0.2",

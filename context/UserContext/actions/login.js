@@ -1,6 +1,6 @@
 import { addSocialUser } from '../../../firebase/addUser';
 import { findUser } from '../../../firebase/findUser';
-import firebase, { auth, fireDb } from '../../../firebase/firebaseConfig';
+import firebase, { auth } from '../../../firebase/firebaseConfig';
 import { LOGIN, SOCIAL_LOGIN, SET_LOADING, SET_ERROR } from '../type';
 
 const message = {
@@ -20,10 +20,16 @@ export const loginUser = async (requestBody, dispatch) => {
     dispatch({ type: LOGIN, payload: result });
     dispatch({ type: SET_LOADING, payload: false });
   } catch (err) {
-    if (err.message) {
+    if (
+      err.code === 'auth/user-not-found' ||
+      err.code === 'auth/wrong-password'
+    ) {
       dispatch({
         type: SET_ERROR,
-        payload: { message: err.message, type: 'error' }
+        payload: {
+          message: 'Authentication failed! Invalid password',
+          type: 'error'
+        }
       });
       dispatch({ type: SET_LOADING, payload: false });
       return;
@@ -52,10 +58,10 @@ export const socialLogin = async dispatch => {
     const userDetail = await addSocialUser(response.user);
     dispatch({ type: SOCIAL_LOGIN, payload: userDetail });
   } catch (err) {
-    if (err.message) {
+    if (err.code === 'auth/popup-closed-by-user') {
       dispatch({
         type: SET_ERROR,
-        payload: { message: err.message, type: 'error' }
+        payload: { message: 'popup closed by user!', type: 'info' }
       });
       dispatch({ type: SET_LOADING, payload: false });
       return;

@@ -30,7 +30,7 @@ const UserContextProvider = ({ children }) => {
     if (authState.error) {
       setTimeout(() => {
         dispatch({ type: SET_ERROR, payload: null });
-      }, 5000);
+      }, 10000);
     }
   }, [authState.error]);
 
@@ -51,6 +51,9 @@ const UserContextProvider = ({ children }) => {
       logout(dispatch);
     }
   };
+  const dispatchRemoveError = () => {
+    dispatch({ type: SET_ERROR, payload: null });
+  };
 
   // console.log(authState);
   return (
@@ -61,7 +64,8 @@ const UserContextProvider = ({ children }) => {
         dispatchSocialLogin,
         dispatchRegister,
         dispatchLogout,
-        dispatchAuthenticate
+        dispatchAuthenticate,
+        dispatchRemoveError
       }}
     >
       {children}

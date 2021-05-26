@@ -1,3 +1,4 @@
+import { findUser } from '../../../firebase/findUser';
 import { auth } from '../../../firebase/firebaseConfig';
 import { AUTH, SET_ERROR, AUTH_FAIL, SET_APP_LOADING } from '../type';
 
@@ -6,17 +7,22 @@ const message = {
 };
 
 export const authentication = async dispatch => {
+  let userBody;
   try {
     dispatch({ type: SET_APP_LOADING, payload: true });
     auth.onAuthStateChanged(user => {
       if (user) {
-        dispatch({ type: AUTH, payload: user });
+        userBody = user;
         dispatch({ type: SET_APP_LOADING, payload: false });
       } else {
         dispatch({ type: AUTH_FAIL, payload: null });
         dispatch({ type: SET_APP_LOADING, payload: false });
       }
     });
+    if (userBody) {
+      const result = await findUser(userBody);
+      dispatch({ type: AUTH, payload: result });
+    }
   } catch (err) {
     if (err.message) {
       dispatch({

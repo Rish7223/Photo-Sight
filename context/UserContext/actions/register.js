@@ -1,5 +1,5 @@
 import { REGISTER, SET_LOADING, SET_ERROR, LOGOUT } from '../type';
-import { auth, fireDb } from '../../../firebase/firebaseConfig';
+import { auth } from '../../../firebase/firebaseConfig';
 import { addUser } from '../../../firebase/addUser';
 
 const message = {
@@ -35,10 +35,24 @@ export const registerUser = async (requestBody, dispatch) => {
     });
     dispatch({ type: SET_LOADING, payload: false });
   } catch (err) {
-    if (err.message) {
+    if (err.code === 'auth/email-already-in-use') {
       dispatch({
         type: SET_ERROR,
-        payload: { message: err.message, type: 'error' }
+        payload: {
+          message: 'You have already register! please sign-in.',
+          type: 'error'
+        }
+      });
+      dispatch({ type: SET_LOADING, payload: false });
+      return;
+    }
+    if (err.code === 'auth/weak-password') {
+      dispatch({
+        type: SET_ERROR,
+        payload: {
+          message: err.message,
+          type: 'error'
+        }
       });
       dispatch({ type: SET_LOADING, payload: false });
       return;
