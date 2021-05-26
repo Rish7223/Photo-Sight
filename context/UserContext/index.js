@@ -52,7 +52,7 @@ const UserContextProvider = ({ children }) => {
     }
   };
 
-  // component body
+  // console.log(authState);
   return (
     <UserContext.Provider
       value={{

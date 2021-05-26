@@ -1,4 +1,6 @@
-import firebase, { auth } from '../../../firebase/firebaseConfig';
+import { addSocialUser } from '../../../firebase/addUser';
+import { findUser } from '../../../firebase/findUser';
+import firebase, { auth, fireDb } from '../../../firebase/firebaseConfig';
 import { LOGIN, SOCIAL_LOGIN, SET_LOADING, SET_ERROR } from '../type';
 
 const message = {
@@ -14,7 +16,8 @@ export const loginUser = async (requestBody, dispatch) => {
     });
     dispatch({ type: SET_LOADING, payload: true });
     const response = await auth.signInWithEmailAndPassword(email, password);
-    dispatch({ type: LOGIN, payload: response.user });
+    const result = await findUser(response.user.uid);
+    dispatch({ type: LOGIN, payload: result });
     dispatch({ type: SET_LOADING, payload: false });
   } catch (err) {
     if (err.message) {
@@ -46,7 +49,8 @@ export const socialLogin = async dispatch => {
       payload: null
     });
     const response = await auth.signInWithPopup(googleProvider);
-    dispatch({ type: SOCIAL_LOGIN, payload: response.user });
+    const userDetail = await addSocialUser(response.user);
+    dispatch({ type: SOCIAL_LOGIN, payload: userDetail });
   } catch (err) {
     if (err.message) {
       dispatch({

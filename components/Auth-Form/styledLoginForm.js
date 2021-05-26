@@ -9,6 +9,7 @@ export const StyledLoginForm = styled.form`
   min-height: 500px;
   display: flex;
   flex-direction: column;
+  box-shadow: 0px 0px 10px rgba(196, 196, 196, 0.5);
 
   .form_data {
     display: flex;

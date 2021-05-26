@@ -23,7 +23,7 @@ const Style = {
 const SignUpForm = () => {
   const [confirm, setConfirm] = useState(false);
   const {
-    authState: { auth, error },
+    authState: { auth },
     dispatchRegister,
     dispatchSocialLogin
   } = useUserContext();
@@ -81,7 +81,7 @@ const SignUpForm = () => {
             onChange={e => onChange(e)}
             placeholder="Type your email address"
             width="100%"
-            padding="14px 0"
+            padding="15px 0"
             required
           />
         </section>
@@ -101,7 +101,7 @@ const SignUpForm = () => {
               onChange={e => onChange(e)}
               placeholder="Type your password"
               width="100%"
-              padding="14px 0"
+              padding="15px 0"
               required
             />
           </section>
@@ -121,7 +121,7 @@ const SignUpForm = () => {
               onChange={e => onChange(e)}
               placeholder="Type your password again"
               width="100%"
-              padding="14px 0"
+              padding="15px 0"
               required
             />
           </section>

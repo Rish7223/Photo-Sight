@@ -1,5 +1,6 @@
 import { REGISTER, SET_LOADING, SET_ERROR, LOGOUT } from '../type';
-import { auth } from '../../../firebase/firebaseConfig';
+import { auth, fireDb } from '../../../firebase/firebaseConfig';
+import { addUser } from '../../../firebase/addUser';
 
 const message = {
   server: 'Network error!'
@@ -26,7 +27,8 @@ export const registerUser = async (requestBody, dispatch) => {
       return;
     }
     const response = await auth.createUserWithEmailAndPassword(email, password);
-    dispatch({ type: REGISTER, payload: response.user });
+    const userDetails = await addUser(response.user);
+    dispatch({ type: REGISTER, payload: userDetails });
     dispatch({
       type: SET_ERROR,
       payload: { message: 'user is successfully created', type: 'success' }
