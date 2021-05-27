@@ -15,7 +15,7 @@ const fadeIn = keyframes`
 const AlertComponent = Styled.div`
     position: absolute;
     padding: 8px 15px; 
-    right: 20px;
+    left: 20px;
     bottom: 3vh;
     display: flex;
     align-items: center;

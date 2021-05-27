@@ -1,17 +1,24 @@
 import AppLayout from '../components/App-Layout';
 import MainNavbar from '../components/Section/Navbar/Navbar';
-import Styled from 'styled-components';
 import PhotoBox from '../components/Block/Photo_card';
-// import { useUserContext } from '../context/UserContext';
-
-const HomeLayout = Styled.div`
-  padding: 20px 0;
-  max-width: 1400px;
-  margin: 0 auto;
-`;
+import { HomeLayout } from '../components/Home-Layout';
+import { useUserContext } from '../context/UserContext';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 export default function Home() {
-  // const { authState } = useUserContext();
+  const {
+    authState: { isAuthenticate }
+  } = useUserContext();
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isAuthenticate !== null) {
+      !isAuthenticate && router.push('/');
+    }
+  }, [isAuthenticate]);
+
   return (
     <AppLayout>
       <HomeLayout>

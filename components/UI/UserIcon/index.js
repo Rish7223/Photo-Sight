@@ -19,6 +19,7 @@ export const Icon = Styled.div`
 
 export const IconLink = Styled.a`
     color: #000d;
+    cursor: pointer;
 
     &:not(:last-child){
         margin-right: 30px;

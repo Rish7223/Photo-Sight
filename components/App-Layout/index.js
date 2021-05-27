@@ -4,7 +4,6 @@ import Head from 'next/head';
 import { useDarkContext } from '../../context/Darkmode';
 import { useUserContext } from '../../context/UserContext';
 import { useEffect } from 'react';
-import { useRouter } from 'next/router';
 
 const LayoutComponent = styled.div`
   min-height: 100vh;
@@ -22,44 +21,36 @@ const AppLayout = ({ title = 'Photosight', children }) => {
     authState: { loading, isAuthenticate },
     dispatchAuthenticate
   } = useUserContext();
-  const router = useRouter();
 
   useEffect(() => {
     dispatchAuthenticate();
-    if (!isAuthenticate) {
-      router.push('/');
-    } else {
-      router.push('/home');
-    }
   }, [isAuthenticate]);
 
   const {
     state: { bgColor }
   } = useDarkContext();
 
-  return (
+  return !loading ? (
     <LayoutComponent bgColor={bgColor}>
       <Head>
         <title>{title}</title>
       </Head>
-      {!loading ? (
-        children
-      ) : (
-        <div
-          style={{
-            minHeight: '100vh',
-            backgroundColor: '#7779',
-            color: '#fff',
-            fontSize: '3rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
-        >
-          loading...
-        </div>
-      )}
+      {children}
     </LayoutComponent>
+  ) : (
+    <div
+      style={{
+        minHeight: '100vh',
+        backgroundColor: '#7772',
+        color: '#2b2b2b',
+        fontSize: '2rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}
+    >
+      loading...
+    </div>
   );
 };
 

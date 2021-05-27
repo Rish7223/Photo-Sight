@@ -17,13 +17,20 @@ const authReducer = (state, action) => {
     case LOGIN:
     case SOCIAL_LOGIN:
     case REGISTER:
-    case AUTH:
       return {
         ...state,
         isAuthenticate: true,
         auth: {
           ...state.auth,
           user: payload
+        }
+      };
+    case AUTH:
+      return {
+        ...state,
+        isAuthenticate: payload,
+        auth: {
+          ...state.auth
         }
       };
     case AUTH_FAIL:

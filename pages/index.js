@@ -3,9 +3,10 @@ import { LoginForm, SignUpForm } from '../components/Auth-Form';
 import Navbar from '../components/Section/Navbar';
 import LoginFormPattern from '../components/UI/PatternBox';
 import Styled from 'styled-components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Alert from '../components/UI/Alert';
 import { useUserContext } from '../context/UserContext';
+import { useRouter } from 'next/router';
 
 const ContentDiv = Styled.div`
   min-height: 90vh;
@@ -37,15 +38,21 @@ const ContentDiv = Styled.div`
 `;
 
 export default function Home() {
+  const router = useRouter();
   const [isLoginComponent, setLoginComponent] = useState(true);
   const {
-    authState: { error },
-    dispatchLogout
+    authState: { error, isAuthenticate }
   } = useUserContext();
+
+  useEffect(() => {
+    if (isAuthenticate) {
+      router.push('/home');
+    }
+  }, [isAuthenticate]);
 
   return (
     <AppLayout>
-      <Navbar logout={dispatchLogout} />
+      <Navbar />
       {error && <Alert type={error.type} message={error.message} />}
       <ContentDiv>
         {isLoginComponent ? (

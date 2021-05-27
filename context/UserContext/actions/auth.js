@@ -1,28 +1,29 @@
 import { findUser } from '../../../firebase/findUser';
 import { auth } from '../../../firebase/firebaseConfig';
-import { AUTH, SET_ERROR, AUTH_FAIL, SET_APP_LOADING } from '../type';
+import { AUTH, SET_ERROR, AUTH_FAIL, SET_APP_LOADING, LOGIN } from '../type';
 
 const message = {
   server: 'Network error!'
 };
 
+const saveUser = async (userBody, dispatch) => {
+  const result = await findUser(userBody.uid);
+  dispatch({ type: LOGIN, payload: result });
+  dispatch({ type: SET_APP_LOADING, payload: false });
+};
+
 export const authentication = async dispatch => {
-  let userBody;
   try {
     dispatch({ type: SET_APP_LOADING, payload: true });
     auth.onAuthStateChanged(user => {
       if (user) {
-        userBody = user;
-        dispatch({ type: SET_APP_LOADING, payload: false });
+        dispatch({ type: AUTH, payload: true });
+        saveUser(user, dispatch);
       } else {
         dispatch({ type: AUTH_FAIL, payload: null });
         dispatch({ type: SET_APP_LOADING, payload: false });
       }
     });
-    if (userBody) {
-      const result = await findUser(userBody);
-      dispatch({ type: AUTH, payload: result });
-    }
   } catch (err) {
     if (err.message) {
       dispatch({

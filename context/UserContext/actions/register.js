@@ -1,4 +1,4 @@
-import { REGISTER, SET_LOADING, SET_ERROR, LOGOUT } from '../type';
+import { REGISTER, SET_LOADING, SET_ERROR, LOGOUT, AUTH } from '../type';
 import { auth } from '../../../firebase/firebaseConfig';
 import { addUser } from '../../../firebase/addUser';
 
@@ -69,7 +69,9 @@ export const registerUser = async (requestBody, dispatch) => {
 export const logout = dispatch => {
   try {
     auth.signOut();
+    dispatch({ type: AUTH, payload: false });
     dispatch({ type: LOGOUT, payload: null });
+
     dispatch({
       type: SET_ERROR,
       payload: { message: 'user is successfully signed-out!', type: 'success' }

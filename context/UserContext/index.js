@@ -14,7 +14,7 @@ const UserContext = createContext();
 export const useUserContext = () => useContext(UserContext);
 
 const initialState = {
-  isAuthenticate: false,
+  isAuthenticate: null,
   auth: {
     user: null,
     authLoading: false
