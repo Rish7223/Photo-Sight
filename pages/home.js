@@ -5,6 +5,7 @@ import { HomeLayout } from '../components/Home-Layout';
 import { useUserContext } from '../context/UserContext';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { GridLayout } from '../components/Grid-Layout/style';
 
 export default function Home() {
   const {
@@ -23,18 +24,9 @@ export default function Home() {
     <AppLayout>
       <HomeLayout>
         <MainNavbar />
-        <div
-          style={{
-            margin: '3rem auto',
-            width: '1000px',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
-            columnGap: '2rem',
-            rowGap: '2rem'
-          }}
-        >
+        <GridLayout>
           <PhotoBox
-            photo="/Photo/photo_1.jpg"
+            photo="/Photo/photo_1-min.jpg"
             userImg="/Photo/user.jpg"
             postedAt="3 days ago"
             likes="234"
@@ -47,7 +39,21 @@ export default function Home() {
             likes="543"
             userName="Jorden234"
           />
-        </div>
+          <PhotoBox
+            photo="/Photo/photo_2.jpg"
+            userImg="/Photo/user.jpg"
+            postedAt="5 days ago"
+            likes="568"
+            userName="Nandinee Sharma"
+          />
+          <PhotoBox
+            photo="/Photo/photo_5.jpg"
+            userImg="/Photo/user.jpg"
+            postedAt="8 days ago"
+            likes="120k"
+            userName="Rishabh Tyagi"
+          />
+        </GridLayout>
       </HomeLayout>
     </AppLayout>
   );

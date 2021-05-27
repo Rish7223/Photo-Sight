@@ -9,7 +9,11 @@ import UserCard from '../components/Block/User_Card';
 export default function MyProfile() {
   const router = useRouter();
   const {
-    authState: { isAuthenticate, loading }
+    authState: {
+      isAuthenticate,
+      loading,
+      auth: { user }
+    }
   } = useUserContext();
 
   useEffect(() => {
@@ -21,8 +25,15 @@ export default function MyProfile() {
     <AppLayout page="profile">
       <HomeLayout>
         <MainNavbar />
-        <div className="content">
-          <UserCard />
+        <div
+          className="content"
+          style={{
+            margin: '3rem auto'
+          }}
+        >
+          {user && (
+            <UserCard userName={user.displayName} userImage={user.photoURL} />
+          )}
         </div>
       </HomeLayout>
     </AppLayout>

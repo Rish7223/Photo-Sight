@@ -1,102 +1,29 @@
-import Styled from 'styled-components';
-import Image from 'next/image';
+import Link from 'next/link';
+import { UserCardLayout } from './styled';
 
-const UserCardLayout = Styled.div`
-    max-width: 250px;
-    padding: 20px;
-    border: 1px solid #2b2b2b;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    .user_img {
-        position: relative;
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        overflow: hidden;
-        border: 2px solid #fff0;
-        box-shadow: 0 0 0 2px #eb1461;
-
-        .img {
-            object-fit: cover;
-        }
-    }
-
-    .info {
-        margin-top: 1rem;
-        padding: 10px 0;
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
-
-        &_data {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            line-height: 1.2;
-
-            h4 {
-                font-size: 1rem;
-                font-weight: 700;
-                color: #2b2b2b;
-            }
-
-            p {
-                font-size: 0.9rem;
-                font-weight: 500;
-                color: #2b2b2b99;
-            }
-        }
-    }
-
-    .follow {
-        padding: 10px 0;
-        width: 100%;
-        &_btn {
-            padding: 8px;
-            width: 100%;
-            border: none;
-            border-radius: 5px;
-            background-color: #208cee;
-            color: #fff;
-            font-size: 1rem;
-            font-weight: 500;
-    
-        }
-
-    }
-
-    .user_details {
-        line-height: 1.3;
-        margin-top: 3rem;
-        h1 {
-            font-size: 1.2rem;
-            color: #2b2b2b;
-        }
-
-        p {
-            font-size: 1rem;
-            color: #2b2b2bdd;
-            margin-top: 10px;
-        }
-    }
-
-    
-`;
-
-const UserCard = ({ userImage }) => {
+const UserCard = ({ userImage, userName, description = null }) => {
   return (
     <UserCardLayout>
       <div className="user_img">
-        <Image
+        <img
           src={userImage ? userImage : '/Photo/user.jpg'}
-          layout="fill"
           className="img"
           alt="user profile"
         />
+        <Link href="/home" className="back">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="back_icon"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </Link>
       </div>
       <div className="info">
         <section className="info_data">
@@ -114,18 +41,11 @@ const UserCard = ({ userImage }) => {
         </section>
       </div>
       <div className="follow">
-        <button className="follow_btn">Follow</button>
+        <button className="follow_btn">Edit Profile</button>
       </div>
       <div className="user_details">
-        <h1>Rishabh Tyagi</h1>
-        <p>
-          I am a student and currently{' '}
-          <span role="img" aria-labelledby="emoji">
-            🌱
-          </span>{' '}
-          learning web technologies. I am also interested or I would say working
-          on python, C/C++, Linux, and Reactjs.
-        </p>
+        <h1>{userName}</h1>
+        <p>{description ? description : 'Add description ...'}</p>
       </div>
     </UserCardLayout>
   );
