@@ -26,7 +26,7 @@ const AppLayout = ({ title = 'Photosight', children }) => {
 
   useEffect(() => {
     dispatchAuthenticate();
-    if (!loading && !isAuthenticate) {
+    if (!isAuthenticate) {
       router.push('/');
     } else {
       router.push('/home');

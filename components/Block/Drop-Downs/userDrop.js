@@ -10,9 +10,6 @@ const DropDown = Styled.div`
       background-color: transparent;
       border: none;
       cursor: pointer;
-      border-radius: 50%;
-      border: 2px solid #0000;
-      box-shadow: 0 0 0 1px #0006;
   }
 
   .menu {
