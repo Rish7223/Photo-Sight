@@ -1,12 +1,21 @@
-import Image from 'next/image';
 import { CardIcon, UserIcon } from '../../UI/UserIcon';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 import { PhotoCard } from './style';
 
 const PhotoBox = ({ likes, photo, userName, userImg, postedAt }) => {
   return (
     <PhotoCard>
       <div className="Image">
-        <Image src={photo} layout="fill" className="img" />
+        <LazyLoadImage
+          effect="blur"
+          src={photo}
+          className="img"
+          alt="user post pic"
+          width="100%"
+          height="100%"
+          delayTime="1000"
+        />
       </div>
       <div className="info">
         <div className="user">

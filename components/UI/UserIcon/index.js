@@ -1,4 +1,5 @@
 import Styled from 'styled-components';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 export const Icon = Styled.div`
     height: 30px;
@@ -53,7 +54,7 @@ export const CardIcon = Styled.button`
 export const UserIcon = ({ img, stroke }) => {
   return (
     <Icon stroke={stroke}>
-      <img src={img} layout="fill" className="img" alt="user icon" />
+      <LazyLoadImage src={img} layout="fill" className="img" alt="user icon" />
     </Icon>
   );
 };

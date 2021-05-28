@@ -1,14 +1,20 @@
 import Link from 'next/link';
 import { UserCardLayout } from './styled';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const UserCard = ({ userImage, userName, description = null }) => {
   return (
     <UserCardLayout>
       <div className="user_img">
-        <img
+        <LazyLoadImage
+          effect="blur"
           src={userImage ? userImage : '/Photo/user.jpg'}
           className="img"
+          layout="fill"
           alt="user profile"
+          height="100%"
+          width="100%"
         />
         <Link href="/home" className="back">
           <svg

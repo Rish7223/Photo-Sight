@@ -11,9 +11,10 @@ export const PhotoCard = Styled.div`
         position: relative;
         flex: 1;
         width: 100%;
+        overflow: hidden;
         
-        .img {
-            object-fit: cover;
+        .img, img {
+            object-fit: cover !important;
         }
     }
 
