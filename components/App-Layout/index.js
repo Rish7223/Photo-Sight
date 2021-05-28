@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import Head from 'next/head';
 import { useDarkContext } from '../../context/Darkmode';
 import { useUserContext } from '../../context/UserContext';
-import { useEffect } from 'react';
 import Loading from '../Block/Loading';
 
 const LayoutComponent = styled.div`
@@ -19,13 +18,8 @@ const LayoutComponent = styled.div`
 
 const AppLayout = ({ title = 'Photosight', children }) => {
   const {
-    authState: { loading, isAuthenticate },
-    dispatchAuthenticate
+    authState: { loading }
   } = useUserContext();
-
-  useEffect(() => {
-    dispatchAuthenticate();
-  }, [isAuthenticate]);
 
   const {
     state: { bgColor }

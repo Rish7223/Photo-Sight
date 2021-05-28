@@ -9,10 +9,15 @@ import { GridLayout } from '../components/Grid-Layout/style';
 
 export default function Home() {
   const {
-    authState: { isAuthenticate }
+    authState: { isAuthenticate },
+    dispatchAuthenticate
   } = useUserContext();
 
   const router = useRouter();
+
+  useEffect(() => {
+    dispatchAuthenticate();
+  }, [isAuthenticate]);
 
   useEffect(() => {
     if (isAuthenticate !== null) {

@@ -5,6 +5,7 @@ import { useUserContext } from '../context/UserContext';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import UserCard from '../components/Block/User_Card';
+import SharePhoto from '../components/Models/Share-Photo';
 
 export default function MyProfile() {
   const router = useRouter();
@@ -13,8 +14,13 @@ export default function MyProfile() {
       isAuthenticate,
       loading,
       auth: { user }
-    }
+    },
+    dispatchAuthenticate
   } = useUserContext();
+
+  useEffect(() => {
+    dispatchAuthenticate();
+  }, [isAuthenticate]);
 
   useEffect(() => {
     if (isAuthenticate !== null) {
@@ -25,16 +31,20 @@ export default function MyProfile() {
     <AppLayout page="profile">
       <HomeLayout>
         <MainNavbar />
-        <div
-          className="content"
-          style={{
-            margin: '3rem auto'
-          }}
-        >
-          {user && (
+
+        {user && (
+          <div
+            className="content"
+            style={{
+              width: '100%',
+              margin: '3rem auto',
+              display: 'flex'
+            }}
+          >
             <UserCard userName={user.displayName} userImage={user.photoURL} />
-          )}
-        </div>
+            <SharePhoto />
+          </div>
+        )}
       </HomeLayout>
     </AppLayout>
   );
