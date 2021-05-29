@@ -18,7 +18,7 @@ export const Icon = Styled.div`
 
 `;
 
-export const IconLink = Styled.a`
+export const IconLink = Styled.section`
     color: #000d;
     cursor: pointer;
 

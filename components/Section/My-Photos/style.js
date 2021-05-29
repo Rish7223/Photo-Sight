@@ -7,12 +7,12 @@ export const MyPhotoLayout = Styled.div`
     .content {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+            gap: 1rem;
     }
 
 
     .photoBox {
-        height: 400px;
+        height: 450px;
         position: relative;
         min-width: 300px;
         width: 100%;
@@ -21,6 +21,7 @@ export const MyPhotoLayout = Styled.div`
             height: 100%;
             width: 100%;
             object-fit: cover;
+            object-position: bottom;
         }
     }
 `;

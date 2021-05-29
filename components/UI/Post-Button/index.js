@@ -2,12 +2,13 @@ import { PostButton } from './style';
 
 const AddPostButton = ({ openModel }) => {
   return (
-    <PostButton onClick={openModel}>
+    <PostButton aria-label="share post" onClick={openModel}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="svg"
         viewBox="0 0 20 20"
         fill="currentColor"
+        aria-hidden="true"
       >
         <path
           fillRule="evenodd"

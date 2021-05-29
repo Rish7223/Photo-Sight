@@ -30,13 +30,14 @@ const PhotoBox = ({ likes, photo, userName, userImg, postedAt, photoALT }) => {
             <span className="number">{likes}</span>
             <span>likes</span>
           </p>
-          <CardIcon>
+          <CardIcon aria-label="like photo">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="svg"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
+              aria-hidden="true"
             >
               <path
                 strokeLinecap="round"
@@ -46,13 +47,14 @@ const PhotoBox = ({ likes, photo, userName, userImg, postedAt, photoALT }) => {
               />
             </svg>
           </CardIcon>
-          <CardIcon>
+          <CardIcon aria-label="comment">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="svg"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
+              aria-hidden="true"
             >
               <path
                 strokeLinecap="round"
@@ -62,13 +64,14 @@ const PhotoBox = ({ likes, photo, userName, userImg, postedAt, photoALT }) => {
               />
             </svg>
           </CardIcon>
-          <CardIcon>
+          <CardIcon aria-label="share photo">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="svg"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
+              aria-hidden="true"
             >
               <path
                 strokeLinecap="round"
@@ -78,12 +81,13 @@ const PhotoBox = ({ likes, photo, userName, userImg, postedAt, photoALT }) => {
               />
             </svg>
           </CardIcon>
-          <CardIcon>
+          <CardIcon aria-label="more detail">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="svg"
               viewBox="0 0 20 20"
               fill="currentColor"
+              aria-hidden="true"
             >
               <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
             </svg>

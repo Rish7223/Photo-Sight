@@ -18,6 +18,11 @@ display: flex;
 align-items: center;
 justify-content: space-between;
 
+.navItems {
+  display: flex;
+  align-items: center;
+}
+
 section {
   display: flex;
   align-items: center;
