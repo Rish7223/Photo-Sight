@@ -5,10 +5,10 @@ import { useUserContext } from '../context/UserContext';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import UserCard from '../components/Block/User_Card';
-import SharePhoto from '../components/Models/Share-Photo';
+import useFetchImages from '../hooks/useFetchImages';
+import MyPhotos from '../components/Section/My-Photos';
 
 export default function MyProfile() {
-  const router = useRouter();
   const {
     authState: {
       isAuthenticate,
@@ -17,6 +17,8 @@ export default function MyProfile() {
     },
     dispatchAuthenticate
   } = useUserContext();
+
+  const router = useRouter();
 
   useEffect(() => {
     dispatchAuthenticate();
@@ -27,11 +29,21 @@ export default function MyProfile() {
       !isAuthenticate && router.push('/');
     }
   }, [isAuthenticate, loading]);
+
+  const { photoList, myPhotoList, fetchMyPhoto } = useFetchImages({
+    isAuthenticate
+  });
+
+  useEffect(() => {
+    if (user && photoList !== 0) {
+      fetchMyPhoto(user.UID);
+    }
+  }, [photoList, user]);
+
   return (
     <AppLayout page="profile">
       <HomeLayout>
         <MainNavbar />
-
         {user && (
           <div
             className="content"
@@ -42,7 +54,7 @@ export default function MyProfile() {
             }}
           >
             <UserCard userName={user.displayName} userImage={user.photoURL} />
-            <SharePhoto />
+            <MyPhotos photoList={myPhotoList} />
           </div>
         )}
       </HomeLayout>

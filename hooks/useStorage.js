@@ -6,10 +6,8 @@ const useStorage = () => {
   const [url, setUrl] = useState('');
   const [error, setError] = useState(null);
   const [progress, setProgress] = useState(0);
-  const [storageLoading, setStorageLoading] = useState(false);
 
   useEffect(() => {
-    setStorageLoading(true);
     if (file) {
       const storageRef = firStorage.ref(file.name);
       storageRef.put(file).on(
@@ -20,37 +18,31 @@ const useStorage = () => {
         },
         error => {
           setError(error);
-          setStorageLoading(false);
         },
         async () => {
           const url = await storageRef.getDownloadURL();
           setUrl(url);
-          setStorageLoading(false);
         }
       );
     } else {
       setError(null);
       setProgress(0);
       setUrl('');
-      setStorageLoading(false);
     }
   }, [file]);
 
   const deleteData = async () => {
     if (file) {
-      setStorageLoading(true);
       const storageRef = firStorage.ref(file.name);
-      const result = storageRef.delete();
-      console.log(result);
+      await storageRef.delete();
       setFile(null);
       setUrl('');
       setError(null);
       setProgress(0);
-      setStorageLoading(false);
     }
   };
 
-  return { url, error, progress, setFile, deleteData, storageLoading };
+  return { url, error, progress, setFile, deleteData };
 };
 
 export default useStorage;

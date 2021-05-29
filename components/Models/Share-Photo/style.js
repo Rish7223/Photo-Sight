@@ -1,4 +1,39 @@
-import Styled from 'styled-components';
+import Styled, { keyframes } from 'styled-components';
+const fadeINBox = keyframes`
+    from {
+        
+        opacity: 0;
+    }
+    to {
+    
+        opacity: 1;
+    }
+`;
+
+export const FormLayout = Styled.div`
+    position: fixed;
+    min-height: 100vh;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 30;
+    background: #fff9;
+    animation: ${fadeINBox} 0.2s ease forwards;
+`;
+
+const fadeIN = keyframes`
+    from {
+        transform: translateY(0);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(5%);
+        opacity: 1;
+    }
+`;
 
 export const StyledSharePhoto = Styled.div`
     max-width: 600px;
@@ -8,8 +43,30 @@ export const StyledSharePhoto = Styled.div`
     padding: 20px;
     border-radius: 10px;
     background-color: #fff;
-    box-shadow: 0 0 5px #2b2b2b22;
+    box-shadow: 0 0 10px #2b2b2b44;
     margin-left: 40px;
+    opacity: 0;
+    position: relative;
+    animation: ${fadeIN} 0.5s 0.5s ease forwards;
+
+    .head {
+        display :flex;
+        align-items: center;
+        justify-content: space-between;
+
+
+        button {
+            background: transparent;
+            color: #2b2b2b;
+            cursor: pointer;
+            border: none;
+
+            .svg {
+                height: 25px;
+                width: 25px;
+            }
+        }
+    }
 
     .select_photo {
         margin: 20px 0;
@@ -35,6 +92,7 @@ export const StyledSharePhoto = Styled.div`
 
 
     .add_detail {
+        position: relative;
         &-data {
             margin: 10px 0;
             label {
@@ -63,6 +121,7 @@ export const StyledSharePhoto = Styled.div`
         .preview {
             margin-top: 10px;
             min-height: 200px;
+            max-height: 300px;
             border: 2px dashed #eb1461;
             border-radius: 10px;
             display: flex;
@@ -71,9 +130,19 @@ export const StyledSharePhoto = Styled.div`
             position: relative;
             overflow: hidden;
 
-            &Img {
-                width: 300px;
+
+
+            .imgBox {
+                max-width: 250px;
+                width: 100%;
                 height: 100%;
+                overflow: hidden;
+
+                .previewImg {
+                    object-fit: cover;
+                    height: 100%;
+                    width: 100%;
+                }
             }
 
             p {

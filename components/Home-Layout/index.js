@@ -1,4 +1,6 @@
 import Styled from 'styled-components';
+import useModel from '../../hooks/useModel';
+import SharePhoto from '../Models/Share-Photo';
 import AddPostButton from '../UI/Post-Button';
 
 const Layout = Styled.div`
@@ -9,9 +11,11 @@ const Layout = Styled.div`
 `;
 
 export const HomeLayout = ({ children }) => {
+  const { isModel, closeModel, openModel } = useModel();
   return (
     <Layout>
-      <AddPostButton />
+      {isModel && <SharePhoto closeModel={closeModel} />}
+      <AddPostButton openModel={openModel} />
       {children}
     </Layout>
   );

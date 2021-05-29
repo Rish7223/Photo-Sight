@@ -1,5 +1,4 @@
 import Styled, { keyframes } from 'styled-components';
-import { useUserContext } from '../../../context/UserContext';
 
 const fadeIn = keyframes`
   from {
@@ -20,7 +19,7 @@ const AlertComponent = Styled.div`
     display: flex;
     align-items: center;
     background-color: #151823;
-    z-index: 10;
+    z-index: 50;
     border-radius: 5px;
     opacity: 1;
     animation: ${fadeIn} 0.2s  ease-in forwards;
@@ -97,13 +96,15 @@ const selectIcons = type => {
   }
 };
 
-const Alert = ({ message, type }) => {
-  const { dispatchRemoveError } = useUserContext();
+const Alert = ({ message, type, closeAlert }) => {
+  const closeAlertComponent = () => {
+    closeAlert();
+  };
   return (
     <AlertComponent type={type}>
       {selectIcons(type)}
       <p className="message">{message}</p>
-      <button className="cut" onClick={dispatchRemoveError}>
+      <button className="cut" onClick={closeAlertComponent} type="button">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"

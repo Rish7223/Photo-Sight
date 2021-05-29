@@ -1,8 +1,8 @@
 import { PostButton } from './style';
 
-const AddPostButton = () => {
+const AddPostButton = ({ openModel }) => {
   return (
-    <PostButton>
+    <PostButton onClick={openModel}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="svg"

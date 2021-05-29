@@ -3,7 +3,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { PhotoCard } from './style';
 
-const PhotoBox = ({ likes, photo, userName, userImg, postedAt }) => {
+const PhotoBox = ({ likes, photo, userName, userImg, postedAt, photoALT }) => {
   return (
     <PhotoCard>
       <div className="Image">
@@ -11,7 +11,7 @@ const PhotoBox = ({ likes, photo, userName, userImg, postedAt }) => {
           effect="blur"
           src={photo}
           className="img"
-          alt="user post pic"
+          alt={photoALT}
           width="100%"
           height="100%"
           delayTime="1000"

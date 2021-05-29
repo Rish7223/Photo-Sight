@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { fireDb } from '../firebase/firebaseConfig';
+import { fireDb, timeStamp } from '../firebase/firebaseConfig';
 
 const collectionRef = fireDb.collection('photos');
 
 const useFirstore = () => {
   const [data, setData] = useState(null);
   const [errorFirstore, setErrorFirstore] = useState(null);
+  const [storageLoading, setStorageLoading] = useState(false);
 
   useEffect(() => {
     if (errorFirstore) {
@@ -21,6 +22,7 @@ const useFirstore = () => {
     }
   }, [data]);
   const saveData = async () => {
+    setStorageLoading(true);
     try {
       if (data) {
         const dataModel = {
@@ -28,27 +30,30 @@ const useFirstore = () => {
           photoALT: data.alt,
           photoName: data.name,
           user: data.user,
+          postedAt: timeStamp(),
           likes: [],
           comments: []
         };
 
-        const result = await collectionRef.add(dataModel);
-        console.log(result.id);
+        await collectionRef.add(dataModel);
         setErrorFirstore({
           type: 'success',
           message: 'Photo is successfully posted!'
         });
+        setStorageLoading(false);
       }
     } catch (error) {
       if (error.message) {
         setErrorFirstore({ type: 'error', message: error.message });
+        setStorageLoading(false);
       } else {
         setErrorFirstore({ type: 'error', message: 'network error!' });
+        setStorageLoading(false);
       }
     }
   };
 
-  return { data, setData, errorFirstore };
+  return { data, setData, errorFirstore, storageLoading, setErrorFirstore };
 };
 
 export default useFirstore;

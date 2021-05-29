@@ -1,19 +1,20 @@
-import { StyledSharePhoto } from './style';
+import { FormLayout, StyledSharePhoto } from './style';
 import { Heading } from '../../UI/Typography';
 import { useEffect, useState } from 'react';
 import useStorage from '../../../hooks/useStorage';
 import ProgressBar from '../../UI/Progress-Bar';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import useFirstore from '../../../hooks/useFirstore';
 import { useUserContext } from '../../../context/UserContext';
-import Alert from '../../UI/Alert';
+import ProcessLoading from '../../Section/Process-Loading';
+import SharePhotoForm from './form';
 
-const SharePhoto = () => {
+const SharePhoto = ({ closeModel }) => {
   const {
     authState: { auth }
   } = useUserContext();
-  const { url, setFile, progress, deleteData, storageLoading } = useStorage();
-  const { setData, errorFirstore } = useFirstore();
+  const { url, setFile, progress, deleteData } = useStorage();
+  const { setData, errorFirstore, storageLoading, setErrorFirstore } =
+    useFirstore();
   const [photo, setPhoto] = useState(null);
   const [photoName, setPhotoName] = useState('');
   const [error, setError] = useState(null);
@@ -51,118 +52,78 @@ const SharePhoto = () => {
     setData(null);
   };
 
-  const onsubmit = () => {
-    if (auth.user && url !== '') {
-      const fileData = {
-        url: url,
-        alt: alt !== '' && alt,
-        name: photoName,
-        user: auth.user
-      };
-      setData(fileData);
-    } else {
-      setError({ message: 'please select a file!' });
-    }
-  };
-
   const deleteContent = () => {
     deleteData();
     resetContent();
   };
 
-  const StorageLoading = () => {
-    return (
-      <div
-        style={{
-          height: '100%',
-          weight: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: '#2b2b2b',
-          position: 'absolute',
-          top: '0',
-          left: '0'
-        }}
-      >
-        loading
-      </div>
-    );
-  };
-
   return (
-    <StyledSharePhoto>
-      {storageLoading && <StorageLoading />}
-      <Heading color="#2b2b2baa" fontSize="2rem">
-        Share Photo
-      </Heading>
-      <div className="select_photo">
-        <label htmlFor="photo">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="svg"
-            viewBox="0 0 20 20"
-            fill="#eb1461"
-          >
-            <path
-              fillRule="evenodd"
-              d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-              clipRule="evenodd"
-            />
-          </svg>
-          <p>{!photoName ? 'select a photo' : photoName}</p>
-        </label>
-        <input
-          type="file"
-          name="photo"
-          id="photo"
-          className="photoInput"
-          onChange={handelPhoto}
+    <FormLayout>
+      <StyledSharePhoto>
+        {storageLoading && <ProcessLoading />}
+        <div className="head">
+          <Heading color="#2b2b2baa" fontSize="2rem">
+            Share Photo
+          </Heading>
+          <button onClick={closeModel}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
+        <div className="select_photo">
+          <label htmlFor="photo">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="svg"
+              viewBox="0 0 20 20"
+              fill="#eb1461"
+            >
+              <path
+                fillRule="evenodd"
+                d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                clipRule="evenodd"
+              />
+            </svg>
+            <p>{!photoName ? 'select a photo' : photoName}</p>
+          </label>
+          <input
+            type="file"
+            name="photo"
+            id="photo"
+            className="photoInput"
+            onChange={handelPhoto}
+          />
+          <ProgressBar progress={progress} />
+          {error && error.message}
+        </div>
+        <SharePhotoForm
+          options={{
+            photoName,
+            setPhotoName,
+            setAlt,
+            alt,
+            deleteContent,
+            errorFirstore,
+            url,
+            onsubmit,
+            setErrorFirstore,
+            auth,
+            setData,
+            setError
+          }}
         />
-        <ProgressBar progress={progress} />
-        {error && error.message}
-      </div>
-      <form className="add_detail">
-        <section className="add_detail-data">
-          <label htmlFor="name">File Name</label>
-          <input
-            id="name"
-            type="text"
-            value={photoName}
-            placeholder="Edit file name..."
-            className="nameInput"
-            onChange={e => setPhotoName(e.target.value)}
-          />
-        </section>
-        <section className="add_detail-data">
-          <label htmlFor="Alt">Alt value</label>
-          <input
-            id="Alt"
-            type="text"
-            value={alt}
-            placeholder="Edit Alt value..."
-            className="nameInput"
-            onChange={e => setAlt(e.target.value)}
-          />
-        </section>
-        <section className="preview">
-          {url !== '' ? (
-            <LazyLoadImage src={url} alt="demo" className="previewImg" />
-          ) : (
-            <p>Preview</p>
-          )}
-        </section>
-        <section className="actions">
-          <button className="cancel" onClick={deleteContent} type="button">
-            cancel
-          </button>
-          <button className="save" type="button" onClick={onsubmit}>
-            save
-          </button>
-        </section>
-        {errorFirstore && errorFirstore.message}
-      </form>
-    </StyledSharePhoto>
+      </StyledSharePhoto>
+    </FormLayout>
   );
 };
 
