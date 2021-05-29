@@ -2,6 +2,9 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Alert from '../../UI/Alert';
 import PropTypes from 'prop-types';
 import Styled from 'styled-components';
+import { useUserContext } from '../../../context/UserContext';
+import { usePhotoContext } from '../../../context/PhotoContext';
+import { useEffect } from 'react';
 
 const Disabled = Styled.div`
     position: absolute;
@@ -15,18 +18,18 @@ const Disabled = Styled.div`
 
 const SharePhotoForm = ({ options }) => {
   const {
-    auth,
-    setData,
-    setError,
-    photoName,
-    setPhotoName,
-    setAlt,
-    alt,
-    deleteContent,
-    errorFirstore,
-    url,
-    setErrorFirstore
-  } = options;
+    authState: { auth }
+  } = useUserContext();
+  const {
+    photoState: {
+      photosError,
+      uploaded: { url }
+    },
+    useSavePhoto,
+    useRemoveError
+  } = usePhotoContext();
+  const { setError, photoName, setPhotoName, setAlt, alt, deleteContent } =
+    options;
 
   const onsubmit = event => {
     event.preventDefault();
@@ -37,14 +40,23 @@ const SharePhotoForm = ({ options }) => {
         name: photoName,
         user: auth.user
       };
-      setData(fileData);
+      useSavePhoto(fileData);
     } else {
       setError({ message: 'please select a file!' });
     }
   };
+
+  useEffect(() => {
+    if (photosError) {
+      setTimeout(() => {
+        useRemoveError();
+      }, 7000);
+    }
+  }, [photosError]);
+
   return (
     <form className="add_detail" onSubmit={onsubmit}>
-      {url == '' && <Disabled />}
+      {url === '' && <Disabled />}
       <section className="add_detail-data">
         <label htmlFor="name">File Name</label>
         <input
@@ -84,13 +96,11 @@ const SharePhotoForm = ({ options }) => {
           save
         </button>
       </section>
-      {errorFirstore && (
+      {photosError && (
         <Alert
-          type={errorFirstore.type}
-          message={errorFirstore.message}
-          closeAlert={() => {
-            setErrorFirstore(null);
-          }}
+          type={photosError.type}
+          message={photosError.message}
+          closeAlert={useRemoveError}
         />
       )}
     </form>
@@ -104,11 +114,6 @@ SharePhotoForm.propTypes = {
     setAlt: PropTypes.func.isRequired,
     alt: PropTypes.string.isRequired,
     deleteContent: PropTypes.func.isRequired,
-    errorFirstore: PropTypes.object.isRequired,
-    url: PropTypes.string.isRequired,
-    setErrorFirstore: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
-    setData: PropTypes.func.isRequired,
     setError: PropTypes.func.isRequired
   })
 };

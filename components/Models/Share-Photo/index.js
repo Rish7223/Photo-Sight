@@ -1,30 +1,34 @@
 import { FormLayout, StyledSharePhoto } from './style';
 import { Heading } from '../../UI/Typography';
 import { useEffect, useState } from 'react';
-import useStorage from '../../../hooks/useStorage';
 import ProgressBar from '../../UI/Progress-Bar';
-import useFirstore from '../../../hooks/useFirstore';
-import { useUserContext } from '../../../context/UserContext';
 import ProcessLoading from '../../Section/Process-Loading';
 import SharePhotoForm from './form';
+import { usePhotoContext } from '../../../context/PhotoContext';
 
 const SharePhoto = ({ closeModel }) => {
   const {
-    authState: { auth }
-  } = useUserContext();
-  const { url, setFile, progress, deleteData } = useStorage();
-  const { setData, errorFirstore, storageLoading, setErrorFirstore } =
-    useFirstore();
+    photoState: {
+      uploaded: { progress },
+      photosError,
+      loadingPhotos
+    },
+    useUploadPhoto,
+    useDeleteFile,
+    useResetContent
+  } = usePhotoContext();
+
   const [photo, setPhoto] = useState(null);
   const [photoName, setPhotoName] = useState('');
   const [error, setError] = useState(null);
   const [alt, setAlt] = useState('');
 
   useEffect(() => {
-    if (errorFirstore) {
-      errorFirstore.type === 'success' && resetContent();
+    if (photosError && photosError.type === 'success') {
+      resetContent();
+      useResetContent();
     }
-  }, [errorFirstore]);
+  }, [photosError]);
 
   const handelPhoto = event => {
     if (!photo) {
@@ -34,7 +38,7 @@ const SharePhoto = ({ closeModel }) => {
         setPhoto(selected);
         setError(null);
         setPhotoName(selected.name);
-        setFile(selected);
+        useUploadPhoto(selected);
       } else {
         setError({ message: 'please choose the image file only (png, jpg)!' });
         setPhoto(null);
@@ -45,22 +49,20 @@ const SharePhoto = ({ closeModel }) => {
   };
   const resetContent = () => {
     setPhoto(null);
-    setFile(null);
     setAlt('');
     setError(null);
     setPhotoName('');
-    setData(null);
   };
 
   const deleteContent = () => {
-    deleteData();
     resetContent();
+    useDeleteFile(photo);
   };
 
   return (
     <FormLayout>
       <StyledSharePhoto>
-        {storageLoading && <ProcessLoading />}
+        {loadingPhotos && <ProcessLoading />}
         <div className="head">
           <Heading color="#2b2b2baa" fontSize="2rem">
             Share Photo
@@ -113,12 +115,6 @@ const SharePhoto = ({ closeModel }) => {
             setAlt,
             alt,
             deleteContent,
-            errorFirstore,
-            url,
-            onsubmit,
-            setErrorFirstore,
-            auth,
-            setData,
             setError
           }}
         />

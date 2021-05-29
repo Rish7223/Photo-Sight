@@ -41,7 +41,8 @@ export default function Home() {
   const router = useRouter();
   const [isLoginComponent, setLoginComponent] = useState(true);
   const {
-    authState: { error, isAuthenticate }
+    authState: { error, isAuthenticate },
+    dispatchRemoveError
   } = useUserContext();
 
   useEffect(() => {
@@ -53,7 +54,13 @@ export default function Home() {
   return (
     <AppLayout>
       <Navbar />
-      {error && <Alert type={error.type} message={error.message} />}
+      {error && (
+        <Alert
+          type={error.type}
+          message={error.message}
+          closeAlert={dispatchRemoveError}
+        />
+      )}
       <ContentDiv>
         {isLoginComponent ? (
           <LoginForm className="form" />

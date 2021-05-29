@@ -6,15 +6,15 @@ export const MyPhotoLayout = Styled.div`
 
     .content {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
             gap: 1rem;
     }
 
 
     .photoBox {
-        height: 450px;
+        height: 350px;
         position: relative;
-        min-width: 300px;
+        min-width: 280px;
         width: 100%;
 
         .photo {

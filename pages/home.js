@@ -6,13 +6,18 @@ import { useUserContext } from '../context/UserContext';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { GridLayout } from '../components/Grid-Layout/style';
-import useFetchImages from '../hooks/useFetchImages';
+import { usePhotoContext } from '../context/PhotoContext';
 
 export default function Home() {
   const {
     authState: { isAuthenticate },
     dispatchAuthenticate
   } = useUserContext();
+
+  const {
+    photoState: { photoList, loadingPhotos },
+    useFetchAllPhotos
+  } = usePhotoContext();
 
   const router = useRouter();
 
@@ -26,16 +31,16 @@ export default function Home() {
     }
   }, [isAuthenticate]);
 
-  const { photoList, fetchPhotoLoading } = useFetchImages({
-    isAuthenticate
-  });
+  useEffect(() => {
+    isAuthenticate && useFetchAllPhotos();
+  }, [isAuthenticate]);
 
   return (
     <AppLayout>
       <HomeLayout>
         <MainNavbar />
         <GridLayout>
-          {fetchPhotoLoading ? (
+          {loadingPhotos ? (
             <p>Fetching photos</p>
           ) : (
             photoList.map(photoData => {
