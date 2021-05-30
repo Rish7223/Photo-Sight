@@ -72,7 +72,12 @@ const SignUpForm = () => {
           Email Address
         </label>
         <section className="form_input">
-          <img src="/Images/email_icon.svg" alt="email icon" />
+          <img
+            src="/Images/email_icon.svg"
+            alt="email icon"
+            height={30}
+            width={30}
+          />
           <Input
             id="email"
             type="email"
@@ -92,7 +97,12 @@ const SignUpForm = () => {
             Password
           </label>
           <section className="form_input form_input2">
-            <img src="/Images/pass_icon.svg" alt="password icon" />
+            <img
+              src="/Images/pass_icon.svg"
+              alt="password icon"
+              height={25}
+              width={25}
+            />
             <Input
               id="password"
               type="password"
@@ -112,7 +122,12 @@ const SignUpForm = () => {
             Confirm Password
           </label>
           <section className="form_input form_input3 ">
-            <img src="/Images/eye_icon.svg" alt="eye icon" />
+            <img
+              src="/Images/eye_icon.svg"
+              alt="eye icon"
+              height={30}
+              width={30}
+            />
             <Input
               id="confirmPassword"
               type="text"

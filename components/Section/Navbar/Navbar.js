@@ -17,9 +17,9 @@ const MainNavbar = () => {
         alt="logo"
       />
       <div className="navItems">
-        <IconLink aria-label="home page">
+        <IconLink>
           <Link href="/home">
-            <a href="/home">
+            <a href="/home" aria-label="home page">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="svg"

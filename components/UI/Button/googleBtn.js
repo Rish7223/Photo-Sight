@@ -29,7 +29,12 @@ const ButtonComponent = styled.button`
 const GoogleAuthButton = ({ onclick }) => {
   return (
     <ButtonComponent type="button" onClick={onclick}>
-      <img src="/Images/google_icon.svg" alt="google icon" />
+      <img
+        src="/Images/google_icon.svg"
+        alt="google icon"
+        width={25}
+        height={25}
+      />
       <p>Login with Google</p>
     </ButtonComponent>
   );

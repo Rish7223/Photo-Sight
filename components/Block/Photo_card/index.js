@@ -14,7 +14,7 @@ const PhotoBox = ({ likes, photo, userName, userImg, postedAt, photoALT }) => {
           alt={photoALT}
           width="100%"
           height="100%"
-          delayTime="1000"
+          delayTime="500"
         />
       </div>
       <div className="info">
