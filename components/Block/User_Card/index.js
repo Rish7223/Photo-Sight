@@ -3,7 +3,7 @@ import { UserCardLayout } from './styled';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-const UserCard = ({ userImage, userName, description = null }) => {
+const UserCard = ({ userImage, userName, description = null, openModel }) => {
   return (
     <UserCardLayout>
       <div className="user_img">
@@ -47,11 +47,17 @@ const UserCard = ({ userImage, userName, description = null }) => {
         </section>
       </div>
       <div className="follow">
-        <button className="follow_btn">Edit Profile</button>
+        <button className="follow_btn" onClick={openModel}>
+          Edit Profile
+        </button>
       </div>
       <div className="user_details">
         <h1>{userName}</h1>
-        <p>{description ? description : 'Add description ...'}</p>
+        <p>
+          {description
+            ? description !== '' && description
+            : 'Add description ...'}
+        </p>
       </div>
     </UserCardLayout>
   );

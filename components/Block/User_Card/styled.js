@@ -71,7 +71,7 @@ export const UserCardLayout = Styled.div`
             width: 100%;
             border: none;
             border-radius: 5px;
-            background-color: #208cee;
+            background-color: #059DC0;
             color: #fff;
             font-size: 1rem;
             font-weight: 500;

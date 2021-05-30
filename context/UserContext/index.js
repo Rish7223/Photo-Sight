@@ -6,7 +6,8 @@ import {
   registerUser,
   socialLogin,
   logout,
-  authentication
+  authentication,
+  updateUserProfile
 } from './actions';
 
 const UserContext = createContext();
@@ -55,6 +56,10 @@ const UserContextProvider = ({ children }) => {
     dispatch({ type: SET_ERROR, payload: null });
   };
 
+  const useUpdateUserProfile = data => {
+    updateUserProfile(data, authState.auth.user, dispatch);
+  };
+
   // console.log(authState);
   return (
     <UserContext.Provider
@@ -65,7 +70,8 @@ const UserContextProvider = ({ children }) => {
         dispatchRegister,
         dispatchLogout,
         dispatchAuthenticate,
-        dispatchRemoveError
+        dispatchRemoveError,
+        useUpdateUserProfile
       }}
     >
       {children}

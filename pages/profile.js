@@ -7,6 +7,8 @@ import { useEffect } from 'react';
 import UserCard from '../components/Block/User_Card';
 import MyPhotos from '../components/Section/My-Photos';
 import { usePhotoContext } from '../context/PhotoContext';
+import EditProfileModel from '../components/Models/Edit-Profile';
+import useModel from '../hooks/useModel';
 
 export default function MyProfile() {
   const {
@@ -23,6 +25,8 @@ export default function MyProfile() {
     useFetchMyPhotos
   } = usePhotoContext();
 
+  const { isModel, openModel, closeModel } = useModel();
+
   const router = useRouter();
 
   useEffect(() => {
@@ -33,16 +37,17 @@ export default function MyProfile() {
     if (isAuthenticate !== null) {
       !isAuthenticate && router.push('/');
     }
-  }, [isAuthenticate, loading]);
+  }, [loading]);
 
   useEffect(() => {
     if (user && photoList !== 0) {
       useFetchMyPhotos(user.UID);
     }
-  }, [user, photoList]);
+  }, [user]);
 
   return (
     <AppLayout page="profile">
+      {isModel && <EditProfileModel closeModel={closeModel} />}
       <HomeLayout>
         <MainNavbar />
         {user && (
@@ -54,7 +59,12 @@ export default function MyProfile() {
               display: 'flex'
             }}
           >
-            <UserCard userName={user.displayName} userImage={user.photoURL} />
+            <UserCard
+              userName={user.displayName}
+              userImage={user.photoURL}
+              description={user.description}
+              openModel={openModel}
+            />
             <MyPhotos photoList={myPhotoList} />
           </div>
         )}

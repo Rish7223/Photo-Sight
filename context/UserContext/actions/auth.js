@@ -6,10 +6,12 @@ const message = {
   server: 'Network error!'
 };
 
-const saveUser = async (userBody, dispatch) => {
-  const result = await findUser(userBody.uid);
-  dispatch({ type: LOGIN, payload: result });
-  dispatch({ type: SET_APP_LOADING, payload: false });
+export const saveUser = async (userBody, dispatch) => {
+  if (userBody.uid) {
+    const result = await findUser(userBody.uid);
+    dispatch({ type: LOGIN, payload: result.data });
+    dispatch({ type: SET_APP_LOADING, payload: false });
+  }
 };
 
 export const authentication = async dispatch => {
