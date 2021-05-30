@@ -1,5 +1,6 @@
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { MyPhotoLayout } from './style';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const MyPhotos = ({ photoList }) => {
   return (
@@ -11,6 +12,9 @@ const MyPhotos = ({ photoList }) => {
               src={item.photoURL}
               alt={item.photoALT}
               className="photo"
+              effect="blur"
+              height="100%"
+              width="100%"
             />
           </div>
         ))}

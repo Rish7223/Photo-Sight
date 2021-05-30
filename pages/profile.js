@@ -40,10 +40,10 @@ export default function MyProfile() {
   }, [loading]);
 
   useEffect(() => {
-    if (user && photoList !== 0) {
+    if (user && photoList.length > 0) {
       useFetchMyPhotos(user.UID);
     }
-  }, [user]);
+  }, [user, photoList]);
 
   return (
     <AppLayout page="profile">

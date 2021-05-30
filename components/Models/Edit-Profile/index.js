@@ -1,9 +1,11 @@
+import { useUserContext } from '../../../context/UserContext';
 import { Heading } from '../../UI/Typography';
 import { FormLayout } from '../Share-Photo/style';
 import EditProfileForm from './form';
 import { StyledEditProfile } from './style';
 
 const EditProfileModel = ({ closeModel }) => {
+  const { dispatchRemoveError } = useUserContext();
   const cancelClose = () => {
     closeModel();
   };
@@ -14,7 +16,12 @@ const EditProfileModel = ({ closeModel }) => {
           <Heading color="#2b2b2baa" fontSize="2rem">
             Edit Profile
           </Heading>
-          <button onClick={closeModel}>
+          <button
+            onClick={() => {
+              dispatchRemoveError();
+              closeModel();
+            }}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="svg"

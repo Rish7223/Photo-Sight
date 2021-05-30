@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useReducer } from 'react';
+import { createContext, useContext, useReducer } from 'react';
 import authReducer from './reducer';
 import { SET_ERROR } from './type';
 import {
@@ -26,14 +26,6 @@ const initialState = {
 
 const UserContextProvider = ({ children }) => {
   const [authState, dispatch] = useReducer(authReducer, initialState);
-
-  useEffect(() => {
-    if (authState.error) {
-      setTimeout(() => {
-        dispatch({ type: SET_ERROR, payload: null });
-      }, 10000);
-    }
-  }, [authState.error]);
 
   const dispatchAuthenticate = () => {
     authentication(dispatch);

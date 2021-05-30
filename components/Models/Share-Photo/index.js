@@ -15,7 +15,8 @@ const SharePhoto = ({ closeModel }) => {
     },
     useUploadPhoto,
     useDeleteFile,
-    useResetContent
+    useResetContent,
+    useRemoveError
   } = usePhotoContext();
 
   const [photo, setPhoto] = useState(null);
@@ -67,7 +68,12 @@ const SharePhoto = ({ closeModel }) => {
           <Heading color="#2b2b2baa" fontSize="2rem">
             Share Photo
           </Heading>
-          <button onClick={closeModel}>
+          <button
+            onClick={() => {
+              useRemoveError();
+              closeModel();
+            }}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="svg"

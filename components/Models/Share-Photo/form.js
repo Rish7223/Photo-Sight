@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import Styled from 'styled-components';
 import { useUserContext } from '../../../context/UserContext';
 import { usePhotoContext } from '../../../context/PhotoContext';
-import { useEffect } from 'react';
 
 const Disabled = Styled.div`
     position: absolute;
@@ -45,14 +44,6 @@ const SharePhotoForm = ({ options }) => {
       setError({ message: 'please select a file!' });
     }
   };
-
-  useEffect(() => {
-    if (photosError) {
-      setTimeout(() => {
-        useRemoveError();
-      }, 7000);
-    }
-  }, [photosError]);
 
   return (
     <form className="add_detail" onSubmit={onsubmit}>

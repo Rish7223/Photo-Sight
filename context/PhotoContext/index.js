@@ -1,4 +1,4 @@
-import { useContext, createContext, useReducer } from 'react';
+import { useContext, createContext, useReducer, useEffect } from 'react';
 import photoReducer from './reducer';
 import {
   fetMyPhotos,
@@ -32,7 +32,6 @@ const PhotosContextProvider = ({ children }) => {
   };
 
   const useFetchMyPhotos = uid => {
-    useFetchAllPhotos();
     fetMyPhotos(photoState.photoList, uid, dispatch);
   };
 
@@ -56,6 +55,10 @@ const PhotosContextProvider = ({ children }) => {
   const useRemoveError = () => {
     dispatch({ type: SET_ERROR, payload: null });
   };
+
+  useEffect(() => {
+    useFetchAllPhotos();
+  }, []);
 
   return (
     <PhotoContext.Provider

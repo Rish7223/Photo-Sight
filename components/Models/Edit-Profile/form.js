@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useUserContext } from '../../../context/UserContext';
 import Alert from '../../UI/Alert';
 
@@ -36,14 +36,6 @@ const EditProfileForm = ({ cancel }) => {
       });
     }
   };
-
-  useEffect(() => {
-    if (formError) {
-      setTimeout(() => {
-        setFormError(null);
-      }, 5000);
-    }
-  }, [formError]);
   return (
     <form className="edit_form" onSubmit={updateUser}>
       <div className="edit_form-data">
@@ -78,7 +70,15 @@ const EditProfileForm = ({ cancel }) => {
         </div>
       </div>
       <section className="actions">
-        <button className="cancel" type="button" onClick={cancel}>
+        <button
+          className="cancel"
+          type="button"
+          onClick={() => {
+            dispatchRemoveError();
+            setFormError(null);
+            cancel();
+          }}
+        >
           cancel
         </button>
         <button className="save" type="submit">
