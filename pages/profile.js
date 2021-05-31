@@ -6,7 +6,6 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import UserCard from '../components/Block/User_Card';
 import MyPhotos from '../components/Section/My-Photos';
-import { usePhotoContext } from '../context/PhotoContext';
 import EditProfileModel from '../components/Models/Edit-Profile';
 import useModel from '../hooks/useModel';
 
@@ -19,11 +18,6 @@ export default function MyProfile() {
     },
     dispatchAuthenticate
   } = useUserContext();
-
-  const {
-    photoState: { myPhotoList, photoList },
-    useFetchMyPhotos
-  } = usePhotoContext();
 
   const { isModel, openModel, closeModel } = useModel();
 
@@ -38,12 +32,6 @@ export default function MyProfile() {
       !isAuthenticate && router.push('/');
     }
   }, [loading]);
-
-  useEffect(() => {
-    if (user && photoList.length > 0) {
-      useFetchMyPhotos(user.UID);
-    }
-  }, [user, photoList]);
 
   return (
     <AppLayout page="profile">
@@ -65,7 +53,7 @@ export default function MyProfile() {
               description={user.description}
               openModel={openModel}
             />
-            <MyPhotos photoList={myPhotoList} />
+            <MyPhotos />
           </div>
         )}
       </HomeLayout>

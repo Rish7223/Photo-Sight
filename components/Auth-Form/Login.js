@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useState } from 'react';
 import { useUserContext } from '../../context/UserContext';
 import { Button } from '../UI/Button';
@@ -85,11 +86,13 @@ const LoginForm = () => {
         {!auth.authLoading ? (
           'Login'
         ) : (
-          <img
+          <Image
             src="/Images/three-dots.svg"
             width="50px"
+            height="10px"
+            layout="fixed"
             alt="loading"
-            aria-hidden="true"
+            className="svg"
           />
         )}
       </Button>

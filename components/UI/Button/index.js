@@ -21,4 +21,8 @@ export const Button = styled(ButtonComponent)`
   padding: ${props => (props.padding ? props.padding : '15px 64px')};
   margin: ${props => (props.margin ? props.margin : '0')};
   width: ${props => props.width};
+
+  .svg {
+    color: #fff;
+  }
 `;

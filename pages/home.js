@@ -4,7 +4,6 @@ import { HomeLayout } from '../components/Home-Layout';
 import { useUserContext } from '../context/UserContext';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { usePhotoContext } from '../context/PhotoContext';
 import AllPhotos from '../components/Section/All-Photos';
 
 export default function Home() {
@@ -12,11 +11,6 @@ export default function Home() {
     authState: { isAuthenticate },
     dispatchAuthenticate
   } = useUserContext();
-
-  const {
-    photoState: { photoList, loadingPhotos },
-    useFetchAllPhotos
-  } = usePhotoContext();
 
   const router = useRouter();
 
@@ -30,15 +24,11 @@ export default function Home() {
     }
   }, [isAuthenticate]);
 
-  useEffect(() => {
-    isAuthenticate && useFetchAllPhotos();
-  }, [isAuthenticate]);
-
   return (
     <AppLayout>
       <HomeLayout>
         <MainNavbar />
-        <AllPhotos loadingPhotos={loadingPhotos} photoList={photoList} />
+        <AllPhotos />
       </HomeLayout>
     </AppLayout>
   );
