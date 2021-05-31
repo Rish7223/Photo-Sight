@@ -5,6 +5,7 @@ import ProgressBar from '../../UI/Progress-Bar';
 import ProcessLoading from '../../Section/Process-Loading';
 import SharePhotoForm from './form';
 import { usePhotoContext } from '../../../context/PhotoContext';
+import resizeFile from '../../../lib/useResizeImage';
 
 const SharePhoto = ({ closeModel }) => {
   const {
@@ -31,15 +32,16 @@ const SharePhoto = ({ closeModel }) => {
     }
   }, [photosError]);
 
-  const handelPhoto = event => {
+  const handelPhoto = async event => {
     if (!photo) {
       const selected = event.target.files[0];
       const types = ['image/png', 'image/jpg', 'image/jpeg'];
       if (selected && types.includes(selected.type)) {
+        const result = await resizeFile(selected);
         setPhoto(selected);
         setError(null);
         setPhotoName(selected.name);
-        useUploadPhoto(selected);
+        useUploadPhoto(result);
       } else {
         setError({ message: 'please choose the image file only (png, jpg)!' });
         setPhoto(null);

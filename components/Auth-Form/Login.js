@@ -90,6 +90,7 @@ const LoginForm = () => {
             src="/Images/three-dots.svg"
             width="50px"
             height="10px"
+            color="#fff"
             layout="fixed"
             alt="loading"
             className="svg"
