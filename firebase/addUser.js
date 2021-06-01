@@ -18,7 +18,7 @@ export const addUser = async userData => {
 
 export const addSocialUser = async userData => {
   const isUser = await findUser(userData.uid);
-  if (!isUser) {
+  if (!isUser.data) {
     return await addUser(userData);
   } else {
     return isUser;

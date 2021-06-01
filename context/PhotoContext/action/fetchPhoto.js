@@ -38,3 +38,24 @@ export const fetMyPhotos = (allPhotos, id, dispatch) => {
   dispatch({ type: SET_MY_PHOTOS, payload: list });
   dispatch({ type: SET_LOADING, payload: false });
 };
+
+export const fetchPhotosLikes = async dispatch => {
+  try {
+    let list = [];
+    const snapshot = await collectionRef.get();
+    snapshot.forEach(photo => list.push(photo.data()));
+    dispatch({ type: SET_ALL_PHOTOS, payload: list });
+  } catch (error) {
+    if (error.message) {
+      dispatch({
+        type: SET_ERROR,
+        payload: { type: 'error', message: error.message }
+      });
+    } else {
+      dispatch({
+        type: SET_ERROR,
+        payload: { type: 'error', message: 'network error!' }
+      });
+    }
+  }
+};

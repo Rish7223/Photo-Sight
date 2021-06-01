@@ -30,20 +30,9 @@ const AllPhotos = () => {
           layout="fixed"
         />
       ) : (
-        photoList.map(photoData => {
-          const { photoALT, photoURL, user, likes } = photoData;
-          return (
-            <PhotoBox
-              photoALT={photoALT}
-              photo={photoURL}
-              userImg={user.photoURL}
-              postedAt="3 days ago"
-              likes={likes.length}
-              userName={user.displayName}
-              key={photoURL}
-            />
-          );
-        })
+        photoList.map(photoData => (
+          <PhotoBox key={photoData.photoId} data={photoData} />
+        ))
       )}
     </GridLayout>
   );

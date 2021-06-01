@@ -5,7 +5,8 @@ import {
   fetchAllPhotos,
   savePhoto,
   uploadPhoto,
-  deleteData
+  deleteData,
+  fetchPhotosLikes
 } from './action';
 import { SET_ERROR, SET_PROGRESS, SET_URL } from './types';
 
@@ -29,6 +30,10 @@ const PhotosContextProvider = ({ children }) => {
 
   const useFetchAllPhotos = () => {
     fetchAllPhotos(dispatch);
+  };
+
+  const useFetchPhotosLikes = () => {
+    fetchPhotosLikes(dispatch);
   };
 
   const useFetchMyPhotos = uid => {
@@ -70,7 +75,8 @@ const PhotosContextProvider = ({ children }) => {
         useFetchMyPhotos,
         useRemoveError,
         useDeleteFile,
-        useResetContent
+        useResetContent,
+        useFetchPhotosLikes
       }}
     >
       {children}

@@ -17,7 +17,10 @@ export const savePhoto = async (data, dispatch, fetchAllPhotos) => {
         comments: []
       };
 
-      await collectionRef.add(dataModel);
+      const response = await collectionRef.add(dataModel);
+      await collectionRef.doc(response.id).update({
+        photoId: response.id
+      });
       dispatch({
         type: SET_ERROR,
         payload: { type: 'success', message: 'Photo is successfully posted!' }
