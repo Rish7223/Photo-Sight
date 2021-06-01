@@ -25,7 +25,7 @@ export const fetchAllPhotos = async dispatch => {
     } else {
       dispatch({
         type: SET_ERROR,
-        payload: { type: 'error', message: 'network error!' }
+        payload: { type: 'error', message: 'network error' }
       });
       dispatch({ type: SET_LOADING, payload: false });
     }

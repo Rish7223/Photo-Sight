@@ -4,7 +4,6 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import { useEffect } from 'react';
 import { usePhotoContext } from '../../../context/PhotoContext';
 import { useUserContext } from '../../../context/UserContext';
-import { CardIcon } from '../../UI/UserIcon';
 import moment from 'moment';
 
 const MyPhotos = () => {
