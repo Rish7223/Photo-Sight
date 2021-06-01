@@ -1,4 +1,9 @@
-import { fetchAllPhotos, fetMyPhotos, fetchPhotosLikes } from './fetchPhoto';
+import {
+  fetchAllPhotos,
+  fetMyPhotos,
+  fetchPhotosLikes,
+  deletePhoto
+} from './fetchPhoto';
 import { savePhoto } from './savePhoto';
 import { uploadPhoto, deleteData } from './uploadPhoto';
 
@@ -8,5 +13,6 @@ export {
   fetchAllPhotos,
   fetMyPhotos,
   deleteData,
-  fetchPhotosLikes
+  fetchPhotosLikes,
+  deletePhoto
 };

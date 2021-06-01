@@ -1,5 +1,14 @@
-import Styled from 'styled-components';
+import Styled, { keyframes } from 'styled-components';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+
+const waveEffect = keyframes`
+  0% {
+    box-shadow: 0 0 0 0px rgba(235,20,97,0.2);
+  }
+  100% {
+    box-shadow: 0 0 0 5px  rgba(235,20,97,0);
+  }
+`;
 
 export const Icon = Styled.div`
     height: 30px;
@@ -29,7 +38,6 @@ export const IconLink = Styled.section`
     .svg {
         height: 25px;
         width: 25px; 
-       
     }   
 `;
 
@@ -46,9 +54,13 @@ export const CardIcon = Styled.button`
 
     .svg {
         height: 22px;
-        width: 22px; 
-       
-    }   
+        width: 22px;
+        border-radius: 10px;
+    }  
+    
+    .like {
+      animation: ${waveEffect} 0.3s ease-out; 
+    }
 `;
 
 export const UserIcon = ({ img, stroke }) => {

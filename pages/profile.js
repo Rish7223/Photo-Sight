@@ -8,6 +8,8 @@ import UserCard from '../components/Block/User_Card';
 import MyPhotos from '../components/Section/My-Photos';
 import EditProfileModel from '../components/Models/Edit-Profile';
 import useModel from '../hooks/useModel';
+import { usePhotoContext } from '../context/PhotoContext';
+import Alert from '../components/UI/Alert';
 
 export default function MyProfile() {
   const {
@@ -18,6 +20,11 @@ export default function MyProfile() {
     },
     dispatchAuthenticate
   } = useUserContext();
+
+  const {
+    photoState: { photosError },
+    useRemoveError
+  } = usePhotoContext();
 
   const { isModel, openModel, closeModel } = useModel();
 
@@ -57,6 +64,13 @@ export default function MyProfile() {
           </div>
         )}
       </HomeLayout>
+      {photosError && (
+        <Alert
+          type={photosError.type}
+          message={photosError.message}
+          closeAlert={useRemoveError}
+        />
+      )}
     </AppLayout>
   );
 }

@@ -42,6 +42,41 @@ export const MyPhotoLayout = Styled.div`
             animation: ${pulsAnimation} 2s infinite;
         }
 
+        .info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 50px;
+            color: #fff;
+            width: 100%;
+            z-index: 10;
+            background-color: rgba(0,0,0,0.5);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            padding: 0 0.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            section {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                height: 100%;
+            }
+
+            .svg {
+                height: 25px;
+                width: 25px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+
+                &:hover {
+                    opacity: 0.7;
+                }
+            }
+        }
+
         .photo {
             height: 100%;
             width: 100%;

@@ -6,7 +6,8 @@ import {
   savePhoto,
   uploadPhoto,
   deleteData,
-  fetchPhotosLikes
+  fetchPhotosLikes,
+  deletePhoto
 } from './action';
 import { SET_ERROR, SET_PROGRESS, SET_URL } from './types';
 
@@ -61,6 +62,10 @@ const PhotosContextProvider = ({ children }) => {
     dispatch({ type: SET_ERROR, payload: null });
   };
 
+  const useDeletePhoto = photoID => {
+    deletePhoto(photoID, dispatch);
+  };
+
   useEffect(() => {
     useFetchAllPhotos();
   }, []);
@@ -76,7 +81,8 @@ const PhotosContextProvider = ({ children }) => {
         useRemoveError,
         useDeleteFile,
         useResetContent,
-        useFetchPhotosLikes
+        useFetchPhotosLikes,
+        useDeletePhoto
       }}
     >
       {children}

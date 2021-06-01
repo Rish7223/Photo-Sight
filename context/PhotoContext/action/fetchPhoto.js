@@ -59,3 +59,27 @@ export const fetchPhotosLikes = async dispatch => {
     }
   }
 };
+
+export const deletePhoto = async (photoID, dispatch) => {
+  try {
+    const myPhotosRef = fireDb.collection('photos').doc(photoID);
+    await myPhotosRef.delete();
+    dispatch({
+      type: SET_ERROR,
+      payload: { type: 'success', message: 'photo is deleted successfully!' }
+    });
+    fetchPhotosLikes(dispatch);
+  } catch (error) {
+    if (error.message) {
+      dispatch({
+        type: SET_ERROR,
+        payload: { type: 'error', message: error.message }
+      });
+    } else {
+      dispatch({
+        type: SET_ERROR,
+        payload: { type: 'error', message: 'network error!' }
+      });
+    }
+  }
+};

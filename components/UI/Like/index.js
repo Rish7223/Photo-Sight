@@ -4,7 +4,7 @@ import { CardIcon } from '../UserIcon';
 const UnLike = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="svg"
+    className="svg unlike"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
@@ -22,7 +22,7 @@ const UnLike = (
 const Like = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="svg"
+    className="svg like"
     viewBox="0 0 20 20"
     fill="#eb1461"
   >
