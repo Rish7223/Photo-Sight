@@ -39,7 +39,7 @@ const PhotoBox = ({ data }) => {
         <div className="actions">
           <p className="likes">
             <span className="number">{likes.length}</span>
-            <span>likes</span>
+            <span>{likes.length > 1 ? 'likes' : 'like'}</span>
           </p>
           {user && <LikePhotoButton photoData={data} userId={user.UID} />}
           <CardIcon aria-label="more detail">
