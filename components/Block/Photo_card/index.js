@@ -4,6 +4,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import { PhotoCard } from './style';
 import LikePhotoButton from '../../UI/Like';
 import { useUserContext } from '../../../context/UserContext';
+import moment from 'moment';
 
 const PhotoBox = ({ data }) => {
   const {
@@ -12,7 +13,8 @@ const PhotoBox = ({ data }) => {
     }
   } = useUserContext();
 
-  const { likes, photoURL, user: photoUser, photoALT } = data;
+  const { likes, photoURL, user: photoUser, photoALT, postedAt } = data;
+  const dateOfPost = moment(postedAt.toDate()).fromNow();
   return (
     <PhotoCard>
       <div className="Image">
@@ -31,7 +33,7 @@ const PhotoBox = ({ data }) => {
           <UserIcon img={photoUser.photoURL} stroke="#eb1461" />
           <section className="user_detail">
             <h3>{photoUser.displayName}</h3>
-            <p>3 days ago</p>
+            <p>{dateOfPost}</p>
           </section>
         </div>
         <div className="actions">

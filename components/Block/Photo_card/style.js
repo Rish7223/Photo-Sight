@@ -68,7 +68,7 @@ export const PhotoCard = Styled.div`
                 h3 {
                     text-transform: capitalize;
                     font-size: 0.9rem;
-                    line-height: 0.5;
+                    line-height: 0.7;
                     color: #2b2b2b;
                 }
 
