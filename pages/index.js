@@ -42,11 +42,16 @@ export default function Home() {
   const [isLoginComponent, setLoginComponent] = useState(true);
   const {
     authState: { error, isAuthenticate },
-    dispatchRemoveError
+    dispatchRemoveError,
+    dispatchAuthenticate
   } = useUserContext();
 
   useEffect(() => {
-    if (isAuthenticate) {
+    dispatchAuthenticate();
+  }, [isAuthenticate]);
+
+  useEffect(() => {
+    if (isAuthenticate !== null && isAuthenticate) {
       router.push('/home');
     }
   }, [isAuthenticate]);

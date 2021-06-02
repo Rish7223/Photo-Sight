@@ -2,8 +2,12 @@ import Link from 'next/link';
 import { UserCardLayout } from './styled';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { usePhotoContext } from '../../../context/PhotoContext';
 
 const UserCard = ({ userImage, userName, description = null, openModel }) => {
+  const {
+    photoState: { myPhotoList }
+  } = usePhotoContext();
   return (
     <UserCardLayout>
       <div className="user_img">
@@ -33,7 +37,7 @@ const UserCard = ({ userImage, userName, description = null, openModel }) => {
       </div>
       <div className="info">
         <section className="info_data">
-          <h3>251</h3>
+          <h3>{myPhotoList.length}</h3>
           <p>posts</p>
         </section>
 
