@@ -1,4 +1,4 @@
-# Photo-Sight
+# Photo-Sight (https://photo-sight2.vercel.app)
 
 The best platform to share you moment with others.
 
@@ -9,6 +9,8 @@ The best platform to share you moment with others.
 - version: 1.0.0
 
 ## Image/Gif
+![image](https://user-images.githubusercontent.com/53928808/120491434-db9f4d00-c3d6-11eb-8b1e-2efadf643e63.png)
+
 
 👨🏻‍💻👨🏻‍💻 Work in progress! 👨🏻‍💻👨🏻‍💻
 
