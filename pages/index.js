@@ -1,12 +1,16 @@
-import AppLayout from '../components/App-Layout';
 import { LoginForm, SignUpForm } from '../components/Auth-Form';
-import Navbar from '../components/Section/Navbar';
-import LoginFormPattern from '../components/UI/PatternBox';
 import Styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import Alert from '../components/UI/Alert';
 import { useUserContext } from '../context/UserContext';
 import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
+
+// dynamic imports
+
+const Alert = dynamic(() => import('../components/UI/Alert'));
+const Navbar = dynamic(() => import('../components/Section/Navbar'));
+const LoginFormPattern = dynamic(() => import('../components/UI/PatternBox'));
+const AppLayout = dynamic(() => import('../components/App-Layout'));
 
 const ContentDiv = Styled.div`
   min-height: 90vh;

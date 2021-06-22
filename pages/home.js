@@ -1,10 +1,13 @@
-import AppLayout from '../components/App-Layout';
-import MainNavbar from '../components/Section/Navbar/Navbar';
 import { HomeLayout } from '../components/Home-Layout';
 import { useUserContext } from '../context/UserContext';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import AllPhotos from '../components/Section/All-Photos';
+import dynamic from 'next/dynamic';
+
+// dynamic imports
+const AllPhotos = dynamic(() => import('../components/Section/All-Photos'));
+const AppLayout = dynamic(() => import('../components/App-Layout'));
+const MainNavbar = dynamic(() => import('../components/Section/Navbar/Navbar'));
 
 export default function Home() {
   const {

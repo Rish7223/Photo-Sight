@@ -1,15 +1,21 @@
-import AppLayout from '../components/App-Layout';
 import { HomeLayout } from '../components/Home-Layout';
-import MainNavbar from '../components/Section/Navbar/Navbar';
 import { useUserContext } from '../context/UserContext';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import UserCard from '../components/Block/User_Card';
-import MyPhotos from '../components/Section/My-Photos';
-import EditProfileModel from '../components/Models/Edit-Profile';
 import useModel from '../hooks/useModel';
 import { usePhotoContext } from '../context/PhotoContext';
-import Alert from '../components/UI/Alert';
+import dynamic from 'next/dynamic';
+
+// dynamic imports
+const Alert = dynamic(() => import('../components/UI/Alert'));
+const UserCard = dynamic(() => import('../components/Block/User_Card'));
+const MyPhotos = dynamic(() => import('../components/Section/My-Photos'));
+const EditProfileModel = dynamic(() =>
+  import('../components/Models/Edit-Profile')
+);
+const AppLayout = dynamic(() => import('../components/App-Layout'));
+
+const MainNavbar = dynamic(() => import('../components/Section/Navbar/Navbar'));
 
 export default function MyProfile() {
   const {
